@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIF RENT CAR</title>
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+   <!-- SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        /* CSS untuk styling halaman */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        button {
+    background-color: lightblue;
+    color: #333;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #333;
+    color: black;
+}
+
+        /* Header */
+        header {
+            background-color: black;
+            color: #fff;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: yellow; /* Ubah warna saat hover */
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .hero img.active {
+            opacity: 1;
+        }
+
+        .hero .content {
+            position: relative;
+            z-index: 2;
+            
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero .box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+
+        /* Features */
+        .features {
+            padding: 2em;
+            background-color: rgba(222, 222, 222, 0.7);
+            color: black;
+            text-align: center;
+        }
+
+        .features ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .features li {
+            margin-bottom: 20px;
+            width: calc(33.33% - 20px);
+            text-align: center;
+        }
+        .features-slider {
+            overflow: hidden;
+            position: relative;
+            margin: 2em 0;
+        }
+
+        .features-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            background-color: ;
+        }
+
+        .features-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .features-item {
+            width: calc(33.33% - 20px);
+            margin-right: 20px;
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+
+        .fleet-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+
+        /* Fleet Slider */
+        .fleet-slider {
+            overflow: hidden;
+            position: relative;
+            margin: 2em 0;
+        }
+
+.fleet-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Snap items to the container */
+}
+
+.fleet-item {
+    flex: 0 0 auto; /* Ensure items do not grow or shrink */
+    scroll-snap-align: start; /* Align items to the start of the container */
+    margin-right: 20px; /* Add margin between items */
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 270px;
+        }
+}
+
+        .fleet-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .fleet-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .fleet-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .fleet-item p {
+            margin-bottom: 10px;
+        }
+
+
+
+        button.prev,
+        button.next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        button.prev {
+            left: 0;
+        }
+
+        button.next {
+            right: 0;
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            background-color: rgba(222, 222, 222, 0.7);
+            color: black;
+            padding: 1em;
+            text-align: center;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: black;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            clear: both;
+        }
+        .contact-logo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Menentukan tumpukan elemen */
+}
+.contact-logo img {
+  width: 150px;
+}
+/* Custom styling for Flatpickr date input fields */
+.flatpickr-input {
+    padding: 10px; /* Add padding for better spacing */
+    border: 2px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    font-size: 16px; /* Adjust font size */
+    color: #333; /* Set text color */
+    background-color: #f9f9f9; /* Set background color */
+    width: 100%; /* Set width to fill container */
+    box-sizing: border-box; /* Ensure padding and border included in width */
+    margin-bottom: 20px;
+}
+
+/* Style placeholder text */
+::placeholder {
+    color: #999; /* Set placeholder text color */
+}
+
+/* Style on focus */
+.flatpickr-input:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #6c63ff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5); /* Add box shadow on focus */
+}
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="Arif Rent Car Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#fleet">Book</a></li>
+            <li><a href="#Lokasi">Lokasi</a></li>
+            <li><a href="#footer">Contact Us</a></li>
+        </ul>
+        </nav>
+</header>
+<main>
+    <section id="home" class="hero">
+        <img src="alphard.jpg" class="active" alt="Car 1">
+        <img src="civic.jpg" alt="Car 2">
+        <img src="camry.jpg" alt="Car 3">
+
+    </section>
+    <section id="about" class="features">
+        <h2>Kenapa Memilih kami?</h2>
+        <div class="features-container">
+            <div class="features-item">
+                <img src="24jam.png" alt="Layanan">
+                <h3>Layanan</h3>
+                <p>Kami memberikan Layanan 24/7 untuk semua customer setiap saat.</p>
+                
+            </div>
+            <div class="features-item">
+                <img src="armada.png" alt="Armada Lengkap">
+                <h3>Armada Lengkap</h3>
+                <p>Kami adalah salah satu rent car terlengkap yang menyediakan berbagai armada untuk kebutuhan anda , dan juga semua armada kami di pastikan dalam komdisi prima . </p>
+                
+            </div>
+            <div class="features-item">
+                <img src="fast.png" alt="Proses cepat">
+                <h3>Proses Cepat</h3>
+                <p>Proses semua booking di kami di lakukan dengan profesional dan cepat tanggap .</p>
+                
+            </div>
+        </div>
+    </section>
+    <!-- Fleet Slider -->
+<!-- Fleet Slider -->
+<!-- Fleet Slider -->
+<section id="fleet" class="fleet-slider">
+    <div class="fleet-container">
+        <!-- Existing items -->
+        <div class="fleet-item">
+            <img src="1.jpeg" alt="Toyota Corolla">
+            <h3>Toyota Alphard</h3>
+            <p>Rp.800.000</p>
+            <!-- Add a date picker input field -->
+            <input type="text" id="dateAlphard" class="flatpickr-input" placeholder="Pilih Tanggal">
+            <!-- Modify the button to call bookNow() with the car name -->
+            <button onclick="bookNow('Toyota Alphard', 'dateAlphard')">Book Now</button>
+        </div>
+        <!-- Other fleet items -->
+        <div class="fleet-item">
+            <img src="2.jpeg" alt="Honda Civic">
+            <h3>Toyota Innova reborn</h3>
+            <p>Rp.450.000</p>
+            <input type="text" id="dateInnova" class="flatpickr-input" placeholder="Pilih Tanggal">
+            <button onclick="bookNow('Toyota Innova reborn', 'dateInnova')">Book Now</button>
+        </div>
+        <div class="fleet-item">
+            <img src="3.jpeg" alt="Toyota Camry">
+            <h3>Honda Brio</h3>
+            <p>Rp.350.000.</p>
+            <input type="text" id="dateBrio" class="flatpickr-input" placeholder="Pilih Tanggal">
+            <button onclick="bookNow('Honda Brio', 'dateBrio')">Book Now</button>
+        </div>
+        <!-- New items without changing size -->
+        <div class="fleet-item">
+            <img src="fortuner.png" alt="New Car 1">
+            <h3>Fortuner</h3>
+            <p>Rp.700.000</p>
+            <input type="text" id="dateFortuner" class="flatpickr-input" placeholder="Pilih Tanggal">
+            <button onclick="bookNow('Fortuner', 'dateFortuner')">Book Now</button>
+        </div>
+        <div class="fleet-item">
+            <img src="pajero.webp" alt="New Car 2">
+            <h3>Pajero</h3>
+            <p>Rp.750.000</p>
+          <span> <input type="text" id="datePajero" class="flatpickr-input" placeholder="Pilih Tanggal"></span>
+            <button onclick="bookNow('Pajero', 'datePajero')">Book Now</button>
+        </div>
+        <!-- Additional items can be added here -->
+    </div>
+    <button class="prev" onclick="prevFleetSlide()">Previous</button>
+    <button class="next" onclick="nextFleetSlide()">Next</button>
+</section>
+    <!-- Embed Google Maps with pin location -->
+<!-- Embed Google Maps with pin location -->
+<section id="Lokasi" >
+<h3 class="section2"><i class="fas fa-map-marked-alt"></i> &nbsp;Lokasi Kami di MAPS :</h3>
+</section1>
+    <iframe
+        width="100%"
+        height="400"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDemzmkSGb0wnXBxqunZAuTWb1wFeDC02M&q=-8.006928443908691,112.62730407714844">
+    </iframe>
+</main>
+<footer id="footer">
+    <p>&copy; 2023 Arif Rent Car. All rights reserved.</p>
+    <div class="contact-logo">
+        <a href="https://api.whatsapp.com/send?phone=+6281252733885&text=Hello%20Arif%20Rent%20Car%20Support" target="_blank">
+            <img src="hub.png" alt="Contact Logo">
+        </a>
+    </div>
+</footer>
+<script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.hero img');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        slideIndex = (slideIndex + 1) % totalSlides;
+        showSlide(slideIndex);
+    }
+
+    setInterval(nextSlide, 3000); // Change image every 3 seconds
+
+    // Slider untuk fleet
+    let fleetSlideIndex = 0;
+    const fleetSlides = document.querySelector('.fleet-container');
+    const fleetTotalSlides = fleetSlides.children.length;
+    const fleetSlideWidth = fleetSlides.children[0].clientWidth;
+
+    function nextFleetSlide() {
+        fleetSlideIndex = (fleetSlideIndex + 1) % fleetTotalSlides;
+        fleetSlides.style.transform = `translateX(-${fleetSlideIndex * fleetSlideWidth}px)`;
+    }
+
+    function prevFleetSlide() {
+        fleetSlideIndex = (fleetSlideIndex - 1 + fleetTotalSlides) % fleetTotalSlides;
+        fleetSlides.style.transform = `translateX(-${fleetSlideIndex * fleetSlideWidth}px)`;
+    }
+
+  
+
+    // Initialize Flatpickr for each date input field
+    flatpickr('.flatpickr-input', {
+        dateFormat: 'Y-m-d', // Customize the date format if needed
+    });
+
+// Initialize Flatpickr for each date input field
+    flatpickr('.flatpickr-input', {
+        dateFormat: 'Y-m-d', // Customize the date format if needed
+    });
+
+    // Define the bookNow() function
+    function bookNow(carName, dateInputId) {
+        // Retrieve the selected date from the input field
+        const selectedDate = document.getElementById(dateInputId).value;
+
+        // Check if the date is empty or not selected
+        if (!selectedDate) {
+            // If date is not selected, display an alert using SweetAlert
+            Swal.fire({
+                title: "Isi Tanggal!",
+                text: "Isi Tanggal book dulu!",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+        } else {
+            // Construct the WhatsApp URL with booking details
+            const whatsappNumber = '6281252733885'; // Replace with your WhatsApp number
+            const message = `Booking ${carName}%0A%0ADate: ${selectedDate}%0ATime: %0AAdditional Details:`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
+
+            // Redirect to the WhatsApp URL
+            window.location.href = whatsappUrl;
+        }
+    }
+</script>
+</body>
+</html>
