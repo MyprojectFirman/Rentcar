@@ -483,7 +483,8 @@ button:hover {
         } else {
             // Construct the WhatsApp URL with booking details
             const whatsappNumber = '6281252733885'; // Replace with your WhatsApp number
-            const message = `Booking ${carName}%0A%0ADate: ${selectedDate}%0ATime: %0AAdditional Details:`;
+                    const message = `Saya ingin memesan mobil ${carName} untuk tanggal ${selectedDate}.`;
+
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
 
             // Redirect to the WhatsApp URL
