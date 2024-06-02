@@ -174,12 +174,13 @@ button:hover {
         }
 
 
-        /* Fleet Slider */
-        .fleet-slider {
-            overflow: hidden;
-            position: relative;
-            margin: 2em 0;
-        }
+        
+/* Fleet Slider */
+.fleet-slider {
+    overflow: hidden;
+    position: relative;
+    margin: 2em 0;
+}
 
 .fleet-container {
     display: flex;
@@ -344,6 +345,8 @@ button:hover {
 <!-- Fleet Slider -->
 <!-- Fleet Slider -->
 <section id="fleet" class="fleet-slider">
+                <button class="prev">&lt;</button>
+
     <div class="fleet-container">
         <!-- Existing items -->
         <div class="fleet-item">
@@ -387,8 +390,9 @@ button:hover {
         </div>
         <!-- Additional items can be added here -->
     </div>
-    <button class="prev" onclick="prevFleetSlide()">Previous</button>
-    <button class="next" onclick="nextFleetSlide()">Next</button>
+                <button class="next">&gt;</button>
+
+  
 </section>
     <!-- Embed Google Maps with pin location -->
 <!-- Embed Google Maps with pin location -->
@@ -440,15 +444,15 @@ button:hover {
     const fleetTotalSlides = fleetSlides.children.length;
     const fleetSlideWidth = fleetSlides.children[0].clientWidth;
 
-    function nextFleetSlide() {
-        fleetSlideIndex = (fleetSlideIndex + 1) % fleetTotalSlides;
-        fleetSlides.style.transform = `translateX(-${fleetSlideIndex * fleetSlideWidth}px)`;
-    }
+    document.querySelector('.fleet-slider .next').addEventListener('click', () => {
+        const container = document.querySelector('.fleet-container');
+        container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+    });
 
-    function prevFleetSlide() {
-        fleetSlideIndex = (fleetSlideIndex - 1 + fleetTotalSlides) % fleetTotalSlides;
-        fleetSlides.style.transform = `translateX(-${fleetSlideIndex * fleetSlideWidth}px)`;
-    }
+    document.querySelector('.fleet-slider .prev').addEventListener('click', () => {
+        const container = document.querySelector('.fleet-container');
+        container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+    });
 
   
 
